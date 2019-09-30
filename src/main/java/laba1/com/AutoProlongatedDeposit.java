@@ -25,24 +25,25 @@ public class AutoProlongatedDeposit extends Deposit {
                     monthDiffer = (month - getDepositDuration()) / 12;
                     if (monthDiffer == 0) monthDiffer += 1;
                     setPercentage(getPercentage() + monthDiffer);
+                    System.out.println(String.format("Your new percentage per month would be: %s", getPercentage()));
                 }
                 int sum = getDepositedSum() / 100 * getPercentage() * month;
-                System.out.println(String.format("You have received %s %s", sum, getCurrency()));
+                System.out.println(String.format("You have received %s %s.", sum, getCurrency()));
                 break;
         }
     }
 
     @Override
     public String toString() {
-        return "Deposit{" +
+        return "Auto Prolongated Deposit{" +
                 "Title = " + getInstance() +
                 ", percentage = " + getPercentage() +
                 ", minimum sum = " + getMinimumSum() +
                 ", deposited sum = " + getDepositedSum() +
                 ", currency = " + getCurrency() +
-                ", cancellation = " + isCancellation() +
+                ", cancellation avaliability = " + isCancellation() +
                 ", deposit duration = " + getDepositDuration() +
-                ", auto prolongate = " + isProlongate() +
+                ", auto prolongate deposit = " + isProlongate() +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ public class FrequencyStrictDeposit extends Deposit {
     public FrequencyStrictDeposit(String instance, int percentage, int minimumSum, int depositedSum, String currency,
                                   boolean cancellation, int depositDuration, int frequency) {
         super(instance, percentage, minimumSum, depositedSum, currency, cancellation, depositDuration);
-        this.frequency = Math.abs(frequency);
+        this.frequency = frequency;
     }
 
     public int getFrequency() {
@@ -36,15 +36,15 @@ public class FrequencyStrictDeposit extends Deposit {
 
     @Override
     public String toString() {
-        return "Deposit{" +
+        return "Frequency Strict Deposit{" +
                 "Name = " + getInstance() +
                 ", percentage = " + getPercentage() +
                 ", minimum sum = " + getMinimumSum() +
                 ", deposited sum = " + getDepositedSum() +
                 ", currency = " + getCurrency() +
-                ", cancellation = " + isCancellation() +
+                ", cancellation avaliability = " + isCancellation() +
                 ", deposit duration = " + getDepositDuration() +
-                ", withdrawal once per x months = " + getFrequency() +
+                ", frequency of withdrawal (once per x months) = " + getFrequency() +
                 '}';
     }
 
