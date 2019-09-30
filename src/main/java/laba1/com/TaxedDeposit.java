@@ -20,7 +20,8 @@ public class TaxedDeposit extends Deposit {
             case 0:
                 System.out.println(String.format("You have 0 %s on your deposit. Please add money first.", getCurrency()));
             default:
-                if (deposit.isCancellation()) {
+                if (deposit.isCancellation() || months >= deposit.getDepositDuration()) {
+                    if (months > getDepositDuration()) months = getDepositDuration();
                     int sum = deposit.getDepositedSum() + (deposit.getDepositedSum() * deposit.getPercentage() / 100 * months);
                     sum -= sum / 100 * getTax();
                     System.out.println(String.format("Your %s deposit is terminated. You have received %s %s",
@@ -33,13 +34,13 @@ public class TaxedDeposit extends Deposit {
 
     @Override
     public String toString() {
-        return "Deposit{" +
+        return "Taxed Deposit{" +
                 "Name = " + getInstance() +
                 ", percentage = " + getPercentage() +
                 ", minimum sum = " + getMinimumSum() +
                 ", deposited sum = " + getDepositedSum() +
                 ", currency = " + getCurrency() +
-                ", cancellation = " + isCancellation() +
+                ", cancellation avaliability = " + isCancellation() +
                 ", deposit duration = " + getDepositDuration() +
                 ", taxes = " + getTax() +
                 '}';

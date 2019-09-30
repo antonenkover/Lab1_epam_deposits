@@ -74,7 +74,7 @@ public abstract class Deposit {
         boolean cancel1 = this.cancellation;
         boolean cancel2 = deposit.isCancellation();
         if (cancel1 == cancel2) return 0;
-        else if (cancel1 == false && cancel2 == true) return 1;
+        else if (!cancel1 & cancel2) return 1;
         else return -1;
     }
 
@@ -91,7 +91,7 @@ public abstract class Deposit {
                 System.out.println(String.format("You have 0 %s on your deposit. Please add money first.", getCurrency()));
                 break;
             default:
-                if (deposit.isCancellation() || months > deposit.getDepositDuration()) {
+                if (deposit.isCancellation() || months >= deposit.getDepositDuration()) {
                     if (months > getDepositDuration()) months = getDepositDuration();
                     int sum = deposit.getDepositedSum() + deposit.getDepositedSum() * deposit.getPercentage() / 100 * months;
                     System.out.println(String.format("Your %s deposit is terminated. You have received %s %s",
