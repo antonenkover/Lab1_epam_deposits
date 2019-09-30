@@ -203,27 +203,29 @@ public class UserInputService {
     }
 
     public void workWithFunds(Bank bank, int num) {
-        bank.getDepositByNum(num);
-        System.out.println("\nChoose your actions:\n1. Add funds\n2. Terminate Deposit\n3. Calculate withdrawal costs\n4. Exit\n");
-        try {
-            switch (new Scanner(System.in).nextInt()) {
-                case 1:
-                    addFunds(bank, num);
-                    return;
-                case 2:
-                    terminateDeposit(bank, num);
-                    break;
-                case 3:
-                    takeMoneyAtCertainMonths(bank, num);
-                    break;
-                case 4:
-                    return;
-                default:
-                    System.out.println("Invalid input. Please try again.\n");
+        while (true) {
+            bank.getDepositByNum(num);
+            System.out.println("\nChoose your actions:\n1. Add funds\n2. Terminate Deposit\n3. Calculate withdrawal costs\n4. Exit\n");
+            try {
+                switch (new Scanner(System.in).nextInt()) {
+                    case 1:
+                        addFunds(bank, num);
+                        return;
+                    case 2:
+                        terminateDeposit(bank, num);
+                        return;
+                    case 3:
+                        takeMoneyAtCertainMonths(bank, num);
+                        return;
+                    case 4:
+                        return;
+                    default:
+                        System.out.println("Invalid input. Please try again.\n");
 
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please try again.\n");
             }
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("Invalid input. Please try again.\n");
         }
     }
 
