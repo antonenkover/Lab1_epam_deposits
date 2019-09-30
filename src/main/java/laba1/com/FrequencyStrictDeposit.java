@@ -36,15 +36,15 @@ public class FrequencyStrictDeposit extends Deposit {
 
     @Override
     public String toString() {
-        return "Frequency Strict Deposit{" +
+        return "Deposit{" +
                 "Name = " + getInstance() +
                 ", percentage = " + getPercentage() +
                 ", minimum sum = " + getMinimumSum() +
                 ", deposited sum = " + getDepositedSum() +
                 ", currency = " + getCurrency() +
-                ", cancellation avaliability = " + isCancellation() +
+                ", cancellation = " + isCancellation() +
                 ", deposit duration = " + getDepositDuration() +
-                ", frequency of withdrawal (once per x months) = " + getFrequency() +
+                ", withdrawal once per x months = " + getFrequency() +
                 '}';
     }
 

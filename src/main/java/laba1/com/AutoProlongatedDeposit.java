@@ -34,15 +34,15 @@ public class AutoProlongatedDeposit extends Deposit {
 
     @Override
     public String toString() {
-        return "Auto Prolongated Deposit{" +
+        return "Deposit{" +
                 "Title = " + getInstance() +
                 ", percentage = " + getPercentage() +
                 ", minimum sum = " + getMinimumSum() +
                 ", deposited sum = " + getDepositedSum() +
                 ", currency = " + getCurrency() +
-                ", cancellation avaliability = " + isCancellation() +
+                ", cancellation = " + isCancellation() +
                 ", deposit duration = " + getDepositDuration() +
-                ", auto prolongate deposit = " + isProlongate() +
+                ", auto prolongate = " + isProlongate() +
                 '}';
     }
 }
