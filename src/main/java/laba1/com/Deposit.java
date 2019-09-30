@@ -9,15 +9,16 @@ public abstract class Deposit {
     private boolean cancellation;
     private String currency;
     private int depositDuration;
+
     public Deposit(String instance, int percentage, int minimumSum, int depositedSum,
                    String currency, boolean cancellation, int depositDuration) {
         this.instance = instance;
-        this.percentage = Math.abs(percentage);
-        this.minimumSum = Math.abs(minimumSum);
+        this.percentage = percentage;
+        this.minimumSum = minimumSum;
         this.depositedSum = depositedSum;
         this.currency = currency;
         this.cancellation = cancellation;
-        this.depositDuration = Math.abs(depositDuration);
+        this.depositDuration = depositDuration;
     }
 
     public String getInstance() {
@@ -33,7 +34,7 @@ public abstract class Deposit {
     }
 
     public void setDepositedSum(int depositedSum) {
-        this.depositedSum = depositedSum;
+        this.depositedSum = Math.abs(depositedSum);
     }
 
     public int getPercentage() {
@@ -41,7 +42,7 @@ public abstract class Deposit {
     }
 
     public void setPercentage(int percentage) {
-        this.percentage = percentage;
+        this.percentage = Math.abs(percentage);
     }
 
     public boolean isCancellation() {
@@ -91,11 +92,12 @@ public abstract class Deposit {
                 System.out.println(String.format("You have 0 %s on your deposit. Please add money first.", getCurrency()));
                 break;
             default:
-                if (deposit.isCancellation() || months > deposit.getDepositDuration()) {
+                if (deposit.isCancellation() || months >= deposit.getDepositDuration()) {
                     if (months > getDepositDuration()) months = getDepositDuration();
                     int sum = deposit.getDepositedSum() + deposit.getDepositedSum() * deposit.getPercentage() / 100 * months;
                     System.out.println(String.format("Your %s deposit is terminated. You have received %s %s",
                             deposit.getInstance(), sum, deposit.getCurrency()));
+                    setDepositedSum(0);
                 } else
                     System.out.println(String.format("Can not cancel %s before the end of contract!", deposit.getInstance()));
                 break;
