@@ -33,13 +33,13 @@ public class TaxedDeposit extends Deposit {
 
     @Override
     public String toString() {
-        return "Taxed Deposit{" +
+        return "Deposit{" +
                 "Name = " + getInstance() +
                 ", percentage = " + getPercentage() +
                 ", minimum sum = " + getMinimumSum() +
                 ", deposited sum = " + getDepositedSum() +
                 ", currency = " + getCurrency() +
-                ", cancellation avaliability = " + isCancellation() +
+                ", cancellation = " + isCancellation() +
                 ", deposit duration = " + getDepositDuration() +
                 ", taxes = " + getTax() +
                 '}';
