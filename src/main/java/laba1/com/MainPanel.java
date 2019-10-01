@@ -6,7 +6,7 @@ public class MainPanel {
 
         UserInputService input = new UserInputService();
 
-        MonoBank monoBank = new MonoBank("Monobank", 6);
+        Bank monoBank = new Bank("Monobank", 6);
 
         monoBank.addDeposit(new TaxedDeposit("StandartMB", 12, 100, 0, "$", true, 16, 9));
         monoBank.addDeposit(new TaxedDeposit("LowTaxMB", 11, 1000, 0, "$", false, 10, 5));
@@ -16,7 +16,7 @@ public class MainPanel {
         monoBank.addDeposit(new AutoProlongatedDeposit("CoolDepositMB", 8, 10, 0, "$", true, 17, true));
 
 
-        PrivatBank privatBank = new PrivatBank("PrivatBank", 6);
+        Bank privatBank = new Bank("PrivatBank", 6);
 
         privatBank.addDeposit(new TaxedDeposit("StandartPB", 10, 10, 0, "$", true, 11, 8));
         privatBank.addDeposit(new TaxedDeposit("LowTaxPB", 9, 10000, 0, "$", false, 2, 1));
@@ -26,7 +26,7 @@ public class MainPanel {
         privatBank.addDeposit(new AutoProlongatedDeposit("CoolDepositPB", 10, 600, 0, "$", false, 9, false));
 
 
-        AlphaBank alphaBank = new AlphaBank("AlphaBank", 6);
+        Bank alphaBank = new Bank("AlphaBank", 6);
 
 
         alphaBank.addDeposit(new TaxedDeposit("StandartAB", 8, 100000, 0, "$", true, 46, 4));
