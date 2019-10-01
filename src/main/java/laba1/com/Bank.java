@@ -23,9 +23,14 @@ public class Bank {
         return numOfDeposits;
     }
 
+    public void setNumOfDeposits(int numOfDeposits) {
+        this.numOfDeposits = numOfDeposits;
+    }
+
     public void addDeposit(Deposit deposit) {
         if (!bankdeposits.contains(deposit))
             bankdeposits.add(deposit);
+        setNumOfDeposits(bankdeposits.size());
     }
 
     public void getDeposits() {
