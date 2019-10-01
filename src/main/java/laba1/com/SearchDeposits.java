@@ -8,32 +8,44 @@ public class SearchDeposits {
         List<Deposit> searchedList = new ArrayList<>();
         switch (searchType) {
             case Percentage:
-                for (Deposit deposit : deposits) {
-                    if (deposit.getPercentage() >= from && deposit.getPercentage() <= to)
-                        searchedList.add(deposit);
-                }
-                searchedList.forEach(System.out::println);
-                if (searchedList.isEmpty())
-                    System.out.println("Deposit was not found\n");
+                searchByPercentage(deposits, from, to, searchedList);
                 break;
             case MinimumSum:
-                for (Deposit deposit : deposits) {
-                    if (deposit.getMinimumSum() >= from && deposit.getMinimumSum() <= to)
-                        searchedList.add(deposit);
-                }
-                searchedList.forEach(System.out::println);
-                if (searchedList.isEmpty())
-                    System.out.println("Deposit was not found\n");
+                searchByMinumumSum(deposits, from, to, searchedList);
                 break;
             case DepositDuration:
-                for (Deposit deposit : deposits) {
-                    if (deposit.getDepositDuration() >= from && deposit.getDepositDuration() <= to)
-                        searchedList.add(deposit);
-                }
-                searchedList.forEach(System.out::println);
-                if (searchedList.isEmpty())
-                    System.out.println("Deposit was not found\n");
+                searchByDepositDuration(deposits, from, to, searchedList);
                 break;
         }
+    }
+
+    public static void searchByDepositDuration(List<Deposit> deposits, int from, int to, List<Deposit> searchedList) {
+        for (Deposit deposit : deposits) {
+            if (deposit.getDepositDuration() >= from && deposit.getDepositDuration() <= to)
+                searchedList.add(deposit);
+        }
+        searchedList.forEach(System.out::println);
+        if (searchedList.isEmpty())
+            System.out.println("Deposit was not found\n");
+    }
+
+    public static void searchByMinumumSum(List<Deposit> deposits, int from, int to, List<Deposit> searchedList) {
+        for (Deposit deposit : deposits) {
+            if (deposit.getMinimumSum() >= from && deposit.getMinimumSum() <= to)
+                searchedList.add(deposit);
+        }
+        searchedList.forEach(System.out::println);
+        if (searchedList.isEmpty())
+            System.out.println("Deposit was not found\n");
+    }
+
+    public static void searchByPercentage(List<Deposit> deposits, int from, int to, List<Deposit> searchedList) {
+        for (Deposit deposit : deposits) {
+            if (deposit.getPercentage() >= from && deposit.getPercentage() <= to)
+                searchedList.add(deposit);
+        }
+        searchedList.forEach(System.out::println);
+        if (searchedList.isEmpty())
+            System.out.println("Deposit was not found\n");
     }
 }
