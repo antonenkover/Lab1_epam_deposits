@@ -75,7 +75,7 @@ public abstract class Deposit {
         boolean cancel1 = this.cancellation;
         boolean cancel2 = deposit.isCancellation();
         if (cancel1 == cancel2) return 0;
-        else if (cancel1 == false && cancel2 == true) return 1;
+        else if (!cancel1 & cancel2) return 1;
         else return -1;
     }
 
