@@ -1,11 +1,15 @@
 package laba1.com;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class UserInputService {
+
+    private static final Logger LOG = Logger.getLogger(UserInputService.class);
 
     public void main(Bank bank1, Bank bank2, Bank bank3) {
         chooseBank(bank1, bank2, bank3);
@@ -24,23 +28,30 @@ public class UserInputService {
                 switch (new Scanner(System.in).nextInt()) {
                     case 1:
                         depositField = Deposit.Fields.Percentage;
+                        LOG.info("Sorting field = " + depositField);
                         break;
                     case 2:
                         depositField = Deposit.Fields.MinimumSum;
+                        LOG.info("Sorting field = " + depositField);
                         break;
                     case 3:
                         depositField = Deposit.Fields.Cancellation;
+                        LOG.info("Sorting field = " + depositField);
                         break;
                     case 4:
                         depositField = Deposit.Fields.DepositDuration;
+                        LOG.info("Sorting field = " + depositField);
                         break;
                     case 5:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
+                        LOG.error("Invalid input. Please try again.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
+                LOG.error("Invalid input. Please try again.");
             }
             SortDeposits.sortDeposits(bank, depositField);
             bank.bankdeposits.forEach(System.out::println);
@@ -58,11 +69,14 @@ public class UserInputService {
                 int from = ints.get(0);
                 int to = ints.get(1);
                 SearchDeposits.search(bank.bankdeposits, searchType, from, to);
+                LOG.info(String.format("Search field: " + searchType + ". Interval: %s - %s", from, to));
             } catch (java.lang.IndexOutOfBoundsException e) {
                 System.out.println("Invalid input. Please try again.");
+                LOG.error("Invalid input. Please try again.");
             }
         } catch (java.lang.NumberFormatException e) {
             System.out.println("Invalid input. Please try again.\n");
+            LOG.error("Invalid input. Please try again.");
         }
     }
 
@@ -84,12 +98,15 @@ public class UserInputService {
                         searchDeposit(bank, Deposit.Fields.DepositDuration);
                         break;
                     case 4:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
+                        LOG.error("Invalid input. Please try again.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
+                LOG.error("Invalid input. Please try again.");
             }
         }
     }
@@ -103,12 +120,15 @@ public class UserInputService {
                         sort(bank);
                         break;
                     case 2:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
+                        LOG.error("Invalid input. Please try again.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
+                LOG.error("Invalid input. Please try again.");
             }
         }
 
@@ -121,16 +141,21 @@ public class UserInputService {
                 switch (new Scanner(System.in).nextInt()) {
                     case 1:
                         showDeposit(bank);
+                        LOG.info("Action chosen: Show");
                         break;
                     case 2:
                         chooseSearchType(bank);
+                        LOG.info("Action chosen: Search");
                         break;
                     case 3:
                         manipulateBank(bank);
+                        LOG.info("Action chosen: Sort");
                         break;
                     case 4:
                         moneyOperations(bank);
+                        LOG.info("Action chosen: Work with money");
                     case 5:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
@@ -148,36 +173,46 @@ public class UserInputService {
                 switch (new Scanner(System.in).nextInt()) {
                     case 1:
                         chooseDeposits(bank1);
+                        LOG.info("Bank chosen: " + bank1.getName());
                         break;
                     case 2:
                         chooseDeposits(bank2);
+                        LOG.info("Bank chosen: " + bank2.getName());
                         break;
                     case 3:
                         chooseDeposits(bank3);
+                        LOG.info("Bank chosen: " + bank3.getName());
                         break;
                     case 4:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
+                        LOG.error("Invalid input. Please try again.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
+                LOG.error("Invalid input. Please try again.");
             }
         }
     }
 
     public void showDeposit(Bank bank) {
         bank.getDeposits();
+        LOG.info("Show deposits of " + bank.getName());
         return;
     }
 
     public void addFunds(Bank bank, int num) {
         System.out.println("\nHow much money do you want to add to this deposit?");
         try {
-            bank.addMoneyToDeposit(num, new Scanner(System.in).nextInt());
+            int money = new Scanner(System.in).nextInt();
+            bank.addMoneyToDeposit(num, money);
+            LOG.info(String.format("Adding %s to deposit num %s", money, num));
             System.out.println("\n");
         } catch (java.util.InputMismatchException e) {
             System.out.println("Invalid input. Please try again.\n");
+            LOG.error("Invalid input. Please try again.");
         }
         workWithFunds(bank, num);
     }
@@ -185,9 +220,12 @@ public class UserInputService {
     public void terminateDeposit(Bank bank, int num) {
         System.out.println("\nAfter how many months you want to terminate your account?");
         try {
-            bank.takeAllMoneyfromDeposit(num, new Scanner(System.in).nextInt());
+            int month = new Scanner(System.in).nextInt();
+            bank.takeAllMoneyfromDeposit(num, month);
+            LOG.info(String.format("Terminating deposit num %s after %s months", num, month));
         } catch (java.util.InputMismatchException e) {
             System.out.println("Invalid input. Please try again.\n");
+            LOG.error("Invalid input. Please try again.");
         }
         workWithFunds(bank, num);
     }
@@ -195,9 +233,12 @@ public class UserInputService {
     public void takeMoneyAtCertainMonths(Bank bank, int num) {
         System.out.println("\nEnter the number of month at which you'll be withdrawing costs");
         try {
-            bank.takeMoneyPerMonth(num, new Scanner(System.in).nextInt());
+            int month = new Scanner(System.in).nextInt();
+            bank.takeMoneyPerMonth(num, month);
+            LOG.info(String.format("Take money from deposit num %s after %s months", num, month));
         } catch (java.util.InputMismatchException e) {
             System.out.println("Invalid input. Please try again.\n");
+            LOG.error("Invalid input. Please try again.");
         }
         workWithFunds(bank, num);
     }
@@ -210,18 +251,22 @@ public class UserInputService {
                 switch (new Scanner(System.in).nextInt()) {
                     case 1:
                         addFunds(bank, num);
+                        LOG.info("Action chosen: Add Funds");
                         return;
                     case 2:
                         terminateDeposit(bank, num);
+                        LOG.info("Action chosen: Terminate Deposit");
                         return;
                     case 3:
                         takeMoneyAtCertainMonths(bank, num);
+                        LOG.info("Action chosen: Calculate withdrawal costs");
                         return;
                     case 4:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
-
+                        LOG.error("Invalid input. Please try again.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
@@ -241,17 +286,22 @@ public class UserInputService {
                         try {
                             num = new Scanner(System.in).nextInt();
                             workWithFunds(bank, num - 1);
+                            LOG.info("Chosen deposit num to work with: " + --num);
                         } catch (java.lang.IndexOutOfBoundsException e) {
                             System.out.println("Enter a valid number.");
+                            LOG.error("Enter a valid number.");
                         }
                         break;
                     case 2:
+                        LOG.info("Action chosen: Exit");
                         return;
                     default:
                         System.out.println("Invalid input. Please try again.\n");
+                        LOG.error("Invalid input. Please try again.");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please try again.\n");
+                LOG.error("Invalid input. Please try again.");
             }
 
         }
