@@ -1,10 +1,27 @@
 package laba1.com;
 
-public class MainPanel {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import org.apache.log4j.Logger;
+
+@SpringBootApplication
+public class MainPanel implements CommandLineRunner {
+
+    private static final Logger LOG = Logger.getLogger(MainPanel.class);
 
     public static void main(String[] args) {
+        LOG.info("Starting application");
+        SpringApplication.run(MainPanel.class, args);
+        LOG.info("Application finished");
+    }
 
-        UserInputService input = new UserInputService();
+    @Override
+    public void run(String... args) throws Exception {
+
+        UserInputService userInputService = new UserInputService();
 
         Bank monoBank = new Bank("Monobank", 6);
 
@@ -36,8 +53,7 @@ public class MainPanel {
         alphaBank.addDeposit(new AutoProlongatedDeposit("NiceDepositAB", 11, 800, 0, "$", true, 8, true));
         alphaBank.addDeposit(new AutoProlongatedDeposit("CoolDepositAB", 13, 1900, 0, "$", true, 14, false));
 
-        input.main(monoBank, privatBank, alphaBank);
-
+        userInputService.main(monoBank, privatBank, alphaBank);
     }
 }
 
