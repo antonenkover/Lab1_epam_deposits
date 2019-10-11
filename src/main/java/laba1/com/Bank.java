@@ -19,9 +19,6 @@ public class Bank {
         return name;
     }
 
-    public int getNumOfDeposits() {
-        return numOfDeposits;
-    }
 
     public void setNumOfDeposits(int numOfDeposits) {
         this.numOfDeposits = numOfDeposits;
@@ -34,11 +31,7 @@ public class Bank {
     }
 
     public void getDeposits() {
-        int i = 1;
-        for (Deposit bankdeposit : bankdeposits) {
-            System.out.println(i + "). " + bankdeposit);
-            i++;
-        }
+        bankdeposits.forEach(deposit -> System.out.println(bankdeposits.indexOf(deposit) + 1 + ". "+ deposit));
     }
 
     public void addMoneyToDeposit(int num, int money) {
