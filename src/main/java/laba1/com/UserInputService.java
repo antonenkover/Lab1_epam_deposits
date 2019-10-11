@@ -62,9 +62,7 @@ public class UserInputService {
         System.out.println("\nEnter the interval values for search(eg. 10-15). Values must be positive");
         try {
             String input = new Scanner(System.in).nextLine();
-            List<Integer> ints = Arrays.stream(input.split("-"))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            List<Integer> ints = Arrays.stream(input.split("-")).map(Integer::parseInt).collect(Collectors.toList());
             try {
                 int from = ints.get(0);
                 int to = ints.get(1);
